@@ -189,8 +189,11 @@ function KayrCovenantMissions.CMFrame_SetupTabs_Hook()
     local adviceFrame = CreateFrame("Frame", "KayrCovenantMissionsAdvice", _G["CovenantMissionFrame"], "TranslucentFrameTemplate")--BackdropTemplateMixin and "BackdropTemplate")
     adviceFrame:SetSize(600, 90)
     adviceFrame:SetPoint("TOPRIGHT", CovenantMissionFrame, "BOTTOMRIGHT")
+    adviceFrame:SetClampedToScreen(true)  -- To keep it on-screen when user has a tiny display resolution
+    adviceFrame:SetFrameStrata("TOOLTIP")
     adviceFrame:Hide()
     KayrCovenantMissions.adviceFrame = adviceFrame
+
     local adviceFrameText = adviceFrame:CreateFontString(adviceFrame, "OVERLAY", "GameTooltipText")
     adviceFrame.text = adviceFrameText
     adviceFrameText:SetPoint("CENTER", 0, 0)

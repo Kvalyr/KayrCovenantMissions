@@ -1,0 +1,6 @@
+## Interface: 90001
+## Title: KayrCovenantMissions
+## Author: Kvalyr
+## Notes: Simple Covenant Mission Success Estimates
+
+KayrCovenantMissions.lua

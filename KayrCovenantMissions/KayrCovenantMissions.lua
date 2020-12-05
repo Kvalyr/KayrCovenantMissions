@@ -7,9 +7,6 @@ local UIParentLoadAddOn = _G["UIParentLoadAddOn"]
 
 -- Debugging
 local KLib = _G["KLib"]
-
-KLib = nil
-
 if not KLib then
     KLib = {}
     KLib.Con = function() end -- No-Op if KLib not available

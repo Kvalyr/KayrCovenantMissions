@@ -1,6 +1,7 @@
 ## Interface: 90002
-## Title: KayrCovenantMissions
+## Title: Simple Covenant Mission Success Estimates
 ## Author: Kvalyr
 ## Notes: Simple Covenant Mission Success Estimates
+## Version: 0.1.0
 
 KayrCovenantMissions.lua

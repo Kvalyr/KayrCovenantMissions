@@ -63,7 +63,6 @@ function KayrCovenantMissions:GetNumMissionPlayerUnitsTotal()
 	local numFollowers = 0
     local missionPage = _G["CovenantMissionFrame"]:GetMissionPage()
     for followerFrame in missionPage.Board:EnumerateFollowers() do
-        KLib:Con(followerFrame:GetFollowerGUID())
 		if followerFrame:GetFollowerGUID() then
 			numFollowers = numFollowers + 1
 		end
@@ -75,7 +74,7 @@ end
 -- --------------------------------------------------------------------------------------------------------------------
 -- Main Hook for success calculation
 -- --------------------------------------------------------
-function KayrCovenantMissions.CMFrame_ShowMission_Hook(missionInfo)
+function KayrCovenantMissions.CMFrame_ShowMission_Hook(...)
     local numPlayerUnits = KayrCovenantMissions:GetNumMissionPlayerUnitsTotal()
     if numPlayerUnits < 1 then
         KayrCovenantMissions:UpdateAdviceText("Add some units to your team to begin success estimation.")
@@ -116,6 +115,7 @@ function KayrCovenantMissions.CMFrame_ShowMission_Hook(missionInfo)
 
     local adviceText = KayrCovenantMissions:ConstructAdviceText(roundsToBeatEnemy, roundsBeforeBeaten, successPossible)
     KayrCovenantMissions:UpdateAdviceText(adviceText)
+    return ...
 end
 
 
@@ -168,15 +168,16 @@ end
 -- --------------------------------------------------------------------------------------------------------------------
 -- Close Mission Hook
 -- --------------------------------------------------------
-function KayrCovenantMissions.CMFrame_CloseMission_Hook()
+function KayrCovenantMissions.CMFrame_CloseMission_Hook(...)
     KayrCovenantMissions.adviceFrame:Hide()
+    return ...
 end
 
 
 -- --------------------------------------------------------------------------------------------------------------------
 -- Init Hook - Fired when the covenant mission table is first accessed
 -- --------------------------------------------------------
-function KayrCovenantMissions.CMFrame_SetupTabs_Hook()
+function KayrCovenantMissions.CMFrame_SetupTabs_Hook(...)
     KLib:Con("KayrCovenantMissions.CMFrame_SetupTabs_Hook")
     if KayrCovenantMissions.showMissionHookDone then return end
 
@@ -202,6 +203,7 @@ function KayrCovenantMissions.CMFrame_SetupTabs_Hook()
     adviceFrameText:SetText("[No Mission Selected]")
 
     KayrCovenantMissions.showMissionHookDone = true
+    return ...
 end
 
 
@@ -210,14 +212,14 @@ end
 -- --------------------------------------------------------
 function KayrCovenantMissions:Init()
     KLib:Con("KayrCovenantMissions.Init")
-    if KayrCovenantMissions.initDone then return end
+    if self.initDone then return end
 
     if not ( IsAddOnLoaded("Blizzard_GarrisonUI") ) then
         UIParentLoadAddOn("Blizzard_GarrisonUI");
     end
 
-    hooksecurefunc(_G["CovenantMissionFrame"], "SetupTabs", KayrCovenantMissions.CMFrame_SetupTabs_Hook)
+    hooksecurefunc(_G["CovenantMissionFrame"], "SetupTabs", self.CMFrame_SetupTabs_Hook)
 
-    KayrCovenantMissions.initDone = true
+    self.initDone = true
 end
 KayrCovenantMissions:Init()

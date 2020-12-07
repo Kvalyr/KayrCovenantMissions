@@ -204,8 +204,9 @@ function KayrCovenantMissions.CMFrame_SetupTabs_Hook(...)
     local frameHeight = 90
     if _i.currentLocale ~= "enUS" then
         -- Extra size for the frame to prevent string truncation risk when i18n applied
-        frameWidth = _i.stringTable[_i.currentLocale]["_adviceFrameWidth"] or 700
-        frameHeight = _i.stringTable[_i.currentLocale]["_adviceFrameHeight"] or 100
+        local localeTable = _i.stringTable[_i.currentLocale] or {}
+        frameWidth = localeTable["_adviceFrameWidth"] or 700
+        frameHeight = localeTable["_adviceFrameHeight"] or 100
     end
     adviceFrame:SetSize(frameWidth, frameHeight)
     adviceFrame:SetPoint("TOPRIGHT", CovenantMissionFrame, "BOTTOMRIGHT")

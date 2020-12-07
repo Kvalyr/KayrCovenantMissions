@@ -5,3 +5,4 @@
 ## Version: 0.1.2
 
 KayrCovenantMissions.lua
+Locales\Locales.xml

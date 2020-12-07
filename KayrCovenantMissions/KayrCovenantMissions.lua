@@ -1,3 +1,4 @@
+local _,tbl = ...
 local max = _G["max"]
 local gsub = _G["gsub"]
 local hooksecurefunc = _G["hooksecurefunc"]
@@ -16,6 +17,7 @@ end
 -- --------------------------------------------------------------------------------------------------------------------
 -- Addon class
 -- --------------------------------------------------------
+tbl.Locales = {}
 KayrCovenantMissions = {}
 KayrCovenantMissions.initDone = false
 KayrCovenantMissions.showMissionHookDone = false
@@ -49,12 +51,11 @@ function ColorText(text, colorStr)
     return "|c" .. colorStr .. text .. colorClose
 end
 KayrCovenantMissions.ColorText = ColorText
-
 local function goodText(text) return ColorText(text, goodTextColor) end
 local function midText(text) return ColorText(text, middlingTextColor) end
 local function badText(text) return ColorText(text, badTextColor) end
 local function warnText(text) return ColorText(text, warningTextColor) end
-
+local L = tbl.Locales
 
 -- --------------------------------------------------------------------------------------------------------------------
 -- GetNumMissionPlayerUnitsTotal
@@ -77,16 +78,16 @@ end
 function KayrCovenantMissions.CMFrame_ShowMission_Hook(...)
     local numPlayerUnits = KayrCovenantMissions:GetNumMissionPlayerUnitsTotal()
     if numPlayerUnits < 1 then
-        KayrCovenantMissions:UpdateAdviceText("Add some units to your team to begin success estimation.")
+        KayrCovenantMissions:UpdateAdviceText(L["Add some units to your team to begin success estimation."])
         return
     end
 
     KLib:Con("KayrCovenantMissions.CMFrame_ShowMission_Hook")
     local missionPage = _G["CovenantMissionFrame"]:GetMissionPage()
-
+    
     local allyHealthValue = missionPage.Board.AllyHealthValue:GetText()
     allyHealthValue = RemoveCommas(allyHealthValue)
-
+    
     local allyPowerValue = missionPage.Board.AllyPowerValue:GetText()
     allyPowerValue = RemoveCommas(allyPowerValue)
 
@@ -131,26 +132,32 @@ function KayrCovenantMissions:ConstructAdviceText(roundsToBeatEnemy, roundsBefor
             numTextColor = middlingTextColor
         end
     end
-    local roundsToBeatText = "rounds"
-    if roundsToBeatEnemy == 1 then roundsToBeatText = "round" end
-    local roundsBeforeBeatenText = "rounds"
-    if roundsBeforeBeaten == 1 then roundsBeforeBeatenText = "round" end
-
+    local roundsToBeatText = L["Rounds"]
+    if roundsToBeatEnemy == 1 then roundsToBeatText = L["Round"] end
+    local roundsBeforeBeatenText = L["Rounds"]
+    if roundsBeforeBeaten == 1 then roundsBeforeBeatenText = L["Round"] end
+    
+    local str = L["TeamRound"]:format(ColorText(roundsToBeatEnemy, numTextColor),roundsToBeatText)
+    str = str .. L["EnemyRound"]:format(ColorText(roundsBeforeBeaten, numTextColor),roundsBeforeBeatenText)
+    --[[
     local str = "It would take " .. ColorText(roundsToBeatEnemy, numTextColor) .. " combat " .. roundsToBeatText .. " for your current team to beat the enemy team.\n"
     str = str .. "It would take " .. ColorText(roundsBeforeBeaten, numTextColor) .. " combat " .. roundsBeforeBeatenText .. " for the enemy team to beat your current team.\n"
-
+    ]]--
     if successPossible then
         if closeResult then
-            str = str .. midText("\nSuccess is possible with your current units, but it will be close.\n")
+            str = str .. midText(L["MissionMid"])
+            --str = str .. midText("\nSuccess is possible with your current units, but it will be close.\n")
         else
-            str = str .. goodText("\nThere is a reasonable chance of success with your current units.\n")
+            str = str .. goodText(L["MissionGood"])
+            --str = str .. goodText("\nThere is a reasonable chance of success with your current units.\n")
 
         end
     else
-        str = str .. badText("\nMission success is impossible with your current units.\n")
+        str = str .. badText(L["MissionBad"])
+        --str = str .. badText("\nMission success is impossible with your current units.\n")
     end
-
-    str = str .. warnText("Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result.")
+    str = str .. warnText(L["GuidanceWarning"])
+    --str = str .. warnText("Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result.")
     return str
 end
 
@@ -200,7 +207,7 @@ function KayrCovenantMissions.CMFrame_SetupTabs_Hook(...)
     adviceFrameText:SetPoint("CENTER", 0, 0)
     adviceFrameText:SetPoint("TOPLEFT", adviceFrame, "TOPLEFT", 14, -14)
     adviceFrameText:SetPoint("BOTTOMRIGHT", adviceFrame, "BOTTOMRIGHT", -14, 14)
-    adviceFrameText:SetText("[No Mission Selected]")
+    adviceFrameText:SetText(L["NoMissionSelected"])
 
     KayrCovenantMissions.showMissionHookDone = true
     return ...

@@ -45,7 +45,9 @@ function i18n.GetLocalization(str, locale)
 
     local i18nTable = i18n.stringTable[locale] or i18n.stringTable["enUS"]
     local result = i18nTable[cleanedStr] or i18n.stringTable["enUS"][cleanedStr] or cleanedStr
-    result = (whitespaceStart or "") .. result .. (whitespaceEnd or "")
+    if result and result ~= "" then
+        result = (whitespaceStart or "") .. result .. (whitespaceEnd or "")
+    end
 
     if not memoizeResults[locale] then memoizeResults[locale] = {} end
     memoizeResults[locale][str] = result
@@ -71,21 +73,19 @@ setmetatable(i18n, mt)
 -- German
 stringTable["deDE"] = {}
 stringTable["deDE"]["_adviceFrameWidth"] = 600
-stringTable["deDE"]["_adviceFrameHeight"] = 90
---[[
-stringTable["deDE"]["Add some units to your team to begin success estimation."] = ""
-stringTable["deDE"]["round"] = ""
-stringTable["deDE"]["rounds"] = ""
-stringTable["deDE"]["It would take"] = ""
-stringTable["deDE"]["combat"] = ""
-stringTable["deDE"]["for your current team to beat the enemy team."] = ""
-stringTable["deDE"]["for the enemy team to beat your current team."] = ""
-stringTable["deDE"]["Success is possible with your current units, but it will be close."] = ""
-stringTable["deDE"]["There is a reasonable chance of success with your current units."] = ""
-stringTable["deDE"]["Mission success is impossible with your current units."] = ""
-stringTable["deDE"]["Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result."] = ""
-stringTable["deDE"]["[No Mission Selected]"] = ""
---]]--
+stringTable["deDE"]["_adviceFrameHeight"] = 100
+stringTable["deDE"]["Add some units to your team to begin success estimation."] = "Fügt Einheiten der Mission hinzu um die Erfolgschancenberechnung zu beginnen."
+stringTable["deDE"]["round"] = " Runde"
+stringTable["deDE"]["rounds"] = " Runden"
+stringTable["deDE"]["It would take"] = "Es benötigt"
+stringTable["deDE"]["combat"] = ""--Gefecht
+stringTable["deDE"]["for your current team to beat the enemy team."] = "bis Euer aktuelles Team den Gegner besiegt."
+stringTable["deDE"]["for the enemy team to beat your current team."] = "bis der Gegner Euer aktuelles Team besiegt."
+stringTable["deDE"]["Success is possible with your current units, but it will be close."] = "Eure aktuellen Einheiten können das Gefecht gewinnen, aber es wird sehr knapp."
+stringTable["deDE"]["There is a reasonable chance of success with your current units."] = "Eure aktuellen Einheiten haben eine gute Chance das Gefecht zu gewinnen."
+stringTable["deDE"]["Mission success is impossible with your current units."] = "Eure aktuellen Einheiten haben keine Chance das Gefecht zu gewinnen."
+stringTable["deDE"]["Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result."] = "Achtung: Diese Richtlinien sind nur eine ungefähre Einschätzung.\nFähigkeiten individueller Einheiten können das Ergebnis stark beeinflussen."
+stringTable["deDE"]["[No Mission Selected]"] = "[Keine Mission ausgewählt]"
 
 -- English
 stringTable["enUS"] = {}

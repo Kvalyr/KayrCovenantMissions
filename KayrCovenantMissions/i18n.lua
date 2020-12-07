@@ -15,7 +15,7 @@ local KLib = _G["KLib"]
 if not KLib then
     KLib = {Con = function() end} -- No-Op if KLib not available
 end
--- KayrCovenantMissions.i18n.currentLocale = "deDE" -- DEBUG
+-- KayrCovenantMissions.i18n.currentLocale = "frFR" -- DEBUG
 -- --------------------------------------------------------------------------------------------------------------------
 
 -- TODO: Use ALIASES instead of passing the enUS str through as stringTable key
@@ -68,7 +68,21 @@ setmetatable(i18n, mt)
 -- --------------------------------------------------------------------------------------------------------------------
 
 -- French
--- stringTable["frFR"] = {}
+stringTable["frFR"] = {}
+stringTable["frFR"]["_adviceFrameWidth"] = 700
+stringTable["frFR"]["_adviceFrameHeight"] = 90
+stringTable["frFR"]["Add some units to your team to begin success estimation."] = "Ajoutez des troupes à votre équipe pour commencer l'estimation."
+stringTable["frFR"]["round"] = " tour"
+stringTable["frFR"]["rounds"] = " tours"
+stringTable["frFR"]["It would take"] = "Il faudrait"
+stringTable["frFR"]["combat"] = ""
+stringTable["frFR"]["for your current team to beat the enemy team."] = "à votre équipe actuelle pour battre l'équipe adverse."
+stringTable["frFR"]["for the enemy team to beat your current team."] = "à l'équipe adverse pour battre votre équipe actuelle."
+stringTable["frFR"]["Success is possible with your current units, but it will be close."] = "Votre équipe actuelle peut gagner, mais de peu."
+stringTable["frFR"]["There is a reasonable chance of success with your current units."] = "Il existe une chance raisonnable de victoire pour votre équipe actuelle."
+stringTable["frFR"]["Mission success is impossible with your current units."] = "Vous ne gagnerez pas avec la composition actuelle."
+stringTable["frFR"]["Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result."] = "Attention: Ceci est donné à titre indicatif. Les capacités adverses peuvent fortement influencer le résultat final."
+stringTable["frFR"]["[No Mission Selected]"] = "[Pas d'aventure sélectionnée]"
 
 -- German
 stringTable["deDE"] = {}

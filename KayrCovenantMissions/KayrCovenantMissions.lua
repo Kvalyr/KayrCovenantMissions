@@ -1,3 +1,7 @@
+-- ====================================================================================================================
+-- =	KayrCovenantMissions - Simple covenent mission success estimates for World of Warcraft: Shadowlands
+-- =	Copyright (c) Kvalyr - 2020-2021 - All Rights Reserved
+-- ====================================================================================================================
 local max = _G["max"]
 local gsub = _G["gsub"]
 local hooksecurefunc = _G["hooksecurefunc"]
@@ -8,8 +12,7 @@ local UIParentLoadAddOn = _G["UIParentLoadAddOn"]
 -- Debugging
 local KLib = _G["KLib"]
 if not KLib then
-    KLib = {}
-    KLib.Con = function() end -- No-Op if KLib not available
+    KLib = {Con = function() end} -- No-Op if KLib not available
 end
 
 
@@ -75,9 +78,10 @@ end
 -- Main Hook for success calculation
 -- --------------------------------------------------------
 function KayrCovenantMissions.CMFrame_ShowMission_Hook(...)
+    local _i = KayrCovenantMissions.i18n
     local numPlayerUnits = KayrCovenantMissions:GetNumMissionPlayerUnitsTotal()
     if numPlayerUnits < 1 then
-        KayrCovenantMissions:UpdateAdviceText("Add some units to your team to begin success estimation.")
+        KayrCovenantMissions:UpdateAdviceText(_i("Add some units to your team to begin success estimation."))
         return
     end
 
@@ -110,8 +114,14 @@ function KayrCovenantMissions.CMFrame_ShowMission_Hook(...)
 
     local successPossible = roundsToBeatEnemy < roundsBeforeBeaten
 
-    KLib:Con("KayrCovenantMissions.CMFrame_ShowMissionHook Values:", allyHealthValue, allyPowerValue, enemyHealthValue, enemyPowerValue)
-    KLib:Con("KayrCovenantMissions.CMFrame_ShowMissionHook Rounds:", roundsToBeatEnemy, roundsBeforeBeaten, successPossible)
+    -- KLib:Con(
+    --     "KayrCovenantMissions.CMFrame_ShowMissionHook Values:",
+    --     allyHealthValue, allyPowerValue, enemyHealthValue, enemyPowerValue
+    -- )
+    -- KLib:Con(
+    --     "KayrCovenantMissions.CMFrame_ShowMissionHook Rounds:",
+    --     roundsToBeatEnemy, roundsBeforeBeaten, successPossible
+    -- )
 
     local adviceText = KayrCovenantMissions:ConstructAdviceText(roundsToBeatEnemy, roundsBeforeBeaten, successPossible)
     KayrCovenantMissions:UpdateAdviceText(adviceText)
@@ -123,6 +133,7 @@ end
 -- ConstructAdviceText
 -- --------------------------------------------------------
 function KayrCovenantMissions:ConstructAdviceText(roundsToBeatEnemy, roundsBeforeBeaten, successPossible)
+    local _i = self.i18n
     local closeResult = (roundsBeforeBeaten - roundsToBeatEnemy) <= 3
     local numTextColor = badTextColor
     if successPossible then
@@ -131,26 +142,26 @@ function KayrCovenantMissions:ConstructAdviceText(roundsToBeatEnemy, roundsBefor
             numTextColor = middlingTextColor
         end
     end
-    local roundsToBeatText = "rounds"
-    if roundsToBeatEnemy == 1 then roundsToBeatText = "round" end
-    local roundsBeforeBeatenText = "rounds"
-    if roundsBeforeBeaten == 1 then roundsBeforeBeatenText = "round" end
+    local roundsToBeatText = _i("rounds")
+    if roundsToBeatEnemy == 1 then roundsToBeatText = _i("round") end
+    local roundsBeforeBeatenText = _i("rounds")
+    if roundsBeforeBeaten == 1 then roundsBeforeBeatenText = _i("round") end
 
-    local str = "It would take " .. ColorText(roundsToBeatEnemy, numTextColor) .. " combat " .. roundsToBeatText .. " for your current team to beat the enemy team.\n"
-    str = str .. "It would take " .. ColorText(roundsBeforeBeaten, numTextColor) .. " combat " .. roundsBeforeBeatenText .. " for the enemy team to beat your current team.\n"
+    local str = _i("It would take ") .. ColorText(roundsToBeatEnemy, numTextColor) .. _i(" combat ") .. roundsToBeatText .. _i(" for your current team to beat the enemy team.\n")
+    str = str .. _i("It would take ") .. ColorText(roundsBeforeBeaten, numTextColor) .. _i(" combat ") .. roundsBeforeBeatenText .. _i(" for the enemy team to beat your current team.\n")
 
     if successPossible then
         if closeResult then
-            str = str .. midText("\nSuccess is possible with your current units, but it will be close.\n")
+            str = str .. midText(_i("\nSuccess is possible with your current units, but it will be close.\n"))
         else
-            str = str .. goodText("\nThere is a reasonable chance of success with your current units.\n")
+            str = str .. goodText(_i("\nThere is a reasonable chance of success with your current units.\n"))
 
         end
     else
-        str = str .. badText("\nMission success is impossible with your current units.\n")
+        str = str .. badText(_i("\nMission success is impossible with your current units.\n"))
     end
 
-    str = str .. warnText("Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result.")
+    str = str .. warnText(_i("Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result."))
     return str
 end
 
@@ -178,6 +189,7 @@ end
 -- Init Hook - Fired when the covenant mission table is first accessed
 -- --------------------------------------------------------
 function KayrCovenantMissions.CMFrame_SetupTabs_Hook(...)
+    local _i = KayrCovenantMissions.i18n
     KLib:Con("KayrCovenantMissions.CMFrame_SetupTabs_Hook")
     if KayrCovenantMissions.showMissionHookDone then return end
 
@@ -187,8 +199,15 @@ function KayrCovenantMissions.CMFrame_SetupTabs_Hook(...)
 
     hooksecurefunc(_G["CovenantMissionFrame"], "CloseMission", KayrCovenantMissions.CMFrame_CloseMission_Hook)
 
-    local adviceFrame = CreateFrame("Frame", "KayrCovenantMissionsAdvice", _G["CovenantMissionFrame"], "TranslucentFrameTemplate")--BackdropTemplateMixin and "BackdropTemplate")
-    adviceFrame:SetSize(600, 90)
+    local adviceFrame = CreateFrame("Frame", "KayrCovenantMissionsAdvice", _G["CovenantMissionFrame"], "TranslucentFrameTemplate")
+    local frameWidth = 600
+    local frameHeight = 90
+    if _i.currentLocale ~= "enUS" then
+        -- Extra size for the frame to prevent string truncation risk when i18n applied
+        frameWidth = _i.stringTable[_i.currentLocale]["_adviceFrameWidth"] or 700
+        frameHeight = _i.stringTable[_i.currentLocale]["_adviceFrameHeight"] or 100
+    end
+    adviceFrame:SetSize(frameWidth, frameHeight)
     adviceFrame:SetPoint("TOPRIGHT", CovenantMissionFrame, "BOTTOMRIGHT")
     adviceFrame:SetClampedToScreen(true)  -- To keep it on-screen when user has a tiny display resolution
     adviceFrame:SetFrameStrata("TOOLTIP")
@@ -200,7 +219,7 @@ function KayrCovenantMissions.CMFrame_SetupTabs_Hook(...)
     adviceFrameText:SetPoint("CENTER", 0, 0)
     adviceFrameText:SetPoint("TOPLEFT", adviceFrame, "TOPLEFT", 14, -14)
     adviceFrameText:SetPoint("BOTTOMRIGHT", adviceFrame, "BOTTOMRIGHT", -14, 14)
-    adviceFrameText:SetText("[No Mission Selected]")
+    adviceFrameText:SetText(_i("[No Mission Selected]"))
 
     KayrCovenantMissions.showMissionHookDone = true
     return ...

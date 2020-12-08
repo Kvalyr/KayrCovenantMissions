@@ -151,10 +151,22 @@ stringTable["zhTW"]["Warning: This guidance is a rough estimate. Unit abilities 
 stringTable["zhTW"]["[No Mission Selected]"] = "[沒有選擇的任務]"
 
 -- Russian
--- stringTable["ruRU"] = {}
+stringTable["ruRU"] = {}
 
 -- Spanish
--- stringTable["esES"] = {}
+stringTable["esES"] = {}
+stringTable["esES"]["Add some units to your team to begin success estimation."] = "Añade tropas a tu equipo para empezar la estimación."
+stringTable["esES"]["round"] = "ronda"
+stringTable["esES"]["rounds"] = "rondas"
+stringTable["esES"]["It would take"] = "Se necesita(n)"
+stringTable["esES"]["combat"] = "combate"
+stringTable["esES"]["for your current team to beat the enemy team."] = "para que tu equipo actual venza al equipo enemigo."
+stringTable["esES"]["for the enemy team to beat your current team."] = "para que el equipo enemigo venza a tu equipo actual."
+stringTable["esES"]["Success is possible with your current units, but it will be close."] = "Su equipo actual puede ganar, pero por un pequeño margen."
+stringTable["esES"]["There is a reasonable chance of success with your current units."] = "Hay una posibilidad razonable de éxito con sus unidades actuales."
+stringTable["esES"]["Mission success is impossible with your current units."] = "El éxito de la misión es imposible con sus unidades actuales."
+stringTable["esES"]["Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result."] = "Advertencia: Esta orientación es una estimación aproximada. Las habilidades de las unidades influyen fuertemente en el resultado real."
+stringTable["esES"]["[No Mission Selected]"] = "[No se ha seleccionado ninguna misión]"
 
 -- Spanish (Mexico)
 -- stringTable["esMX"] = {}

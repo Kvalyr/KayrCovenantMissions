@@ -2,7 +2,7 @@
 ## Title: Covenant Mission Success Estimates
 ## Author: Kvalyr
 ## Notes: Simple Covenant Mission Success Estimates
-## Version: 0.3.0
+## Version: 0.3.1
 
 KayrCovenantMissions.lua
 i18n.lua

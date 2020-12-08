@@ -152,6 +152,18 @@ stringTable["zhTW"]["[No Mission Selected]"] = "[沒有選擇的任務]"
 
 -- Russian
 stringTable["ruRU"] = {}
+stringTable["ruRU"]["Add some units to your team to begin success estimation."] = "Добавьте несколько отрядов в свою команду, чтобы начать оценку успеха."
+stringTable["ruRU"]["round"] = "раунд"
+stringTable["ruRU"]["rounds"] = "раунды"
+stringTable["ruRU"]["It would take"] = "Это займет"
+stringTable["ruRU"]["combat"] = "бой"
+stringTable["ruRU"]["for your current team to beat the enemy team."] = "чтобы ваша текущая команда победила команду противника."
+stringTable["ruRU"]["for the enemy team to beat your current team."] = "чтобы вражеская команда победила вашу текущую команду."
+stringTable["ruRU"]["Success is possible with your current units, but it will be close."] = "Успех возможен с вашими текущими отрядами, но он будет низкий."
+stringTable["ruRU"]["There is a reasonable chance of success with your current units."] = "Есть разумный шанс на успех с вашими текущими отрядами."
+stringTable["ruRU"]["Mission success is impossible with your current units."] = "Успех миссии невозможен с вашими текущими отрядами."
+stringTable["ruRU"]["Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result."] = "Предупреждение: это приблизительная оценка. Способности соратника сильно влияют на фактический результат."
+stringTable["ruRU"]["[No Mission Selected]"] = "[Миссия не выбрана]"
 
 -- Spanish
 stringTable["esES"] = {}

@@ -15,7 +15,7 @@ local KLib = _G["KLib"]
 if not KLib then
     KLib = {Con = function() end} -- No-Op if KLib not available
 end
--- KayrCovenantMissions.i18n.currentLocale = "frFR" -- DEBUG
+--  KayrCovenantMissions.i18n.currentLocale = "koKR" -- DEBUG
 -- --------------------------------------------------------------------------------------------------------------------
 
 -- TODO: Use ALIASES instead of passing the enUS str through as stringTable key
@@ -110,12 +110,26 @@ stringTable["enGB"] = stringTable["enUS"]
 -- stringTable["itIT"] = {}
 
 -- Korean (RTL)
--- stringTable["koKR"] = {}
+stringTable["koKR"] = {}
+stringTable["koKR"]["_adviceFrameWidth"] = 550
+stringTable["koKR"]["_adviceFrameHeight"] = 100
+stringTable["koKR"]["Add some units to your team to begin success estimation."] = "성공률 계산을 하기 위해 몇몇의 병력을 추가하세요."
+stringTable["koKR"]["round"] = "판"
+stringTable["koKR"]["rounds"] = "판들"
+stringTable["koKR"]["It would take"] = "걸립니다"
+stringTable["koKR"]["combat"] = "전투"
+stringTable["koKR"]["for your current team to beat the enemy team."] = "당신의 팀이 적군의 팀을 이기기 위해."
+stringTable["koKR"]["for the enemy team to beat your current team."] = "적군의 팀이 당신의 팀을 이기기 위해."
+stringTable["koKR"]["Success is possible with your current units, but it will be close."] = "현재의 병력들로 성공이 가능하긴 하지만, 실패 할 수 도 있습니다."
+stringTable["koKR"]["There is a reasonable chance of success with your current units."] = "현재의 병력으로 합리적인 임무성공을 할 수 있습니다."
+stringTable["koKR"]["Mission success is impossible with your current units."] = "현재의 병력들로는 임무성공이 불가능 합니다."
+stringTable["koKR"]["Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result."] = "경고: 이 수호자는 대략적인 평가입니다. 유닛의 기술이 중요하게 실제결과에 영향을 미칩니다."
+stringTable["koKR"]["[No Mission Selected]"] = "[임무가 선택되지 않았습니다]"
 
 -- Simplified Chinese
 -- Translation by Azpilicuet@CN主宰之剑
 stringTable["zhCN"] = {}
-stringTable["zhCN"]["_adviceFrameWidth"] = 500
+stringTable["zhCN"]["_adviceFrameWidth"] = 550
 stringTable["zhCN"]["_adviceFrameHeight"] = 100
 stringTable["zhCN"]["Add some units to your team to begin success estimation."] = "将一些随从加入到你的队伍中以开始成功估算。"
 stringTable["zhCN"]["round"] = "回合"
@@ -135,7 +149,7 @@ stringTable["zhCN"]["[No Mission Selected]"] = "[没有选择任务]"
 -- Translation by BNS (三皈依 - 暗影之月)@miliui
 -- Arranged by Azpilicuet@CN主宰之剑
 stringTable["zhTW"] = {}
-stringTable["zhTW"]["_adviceFrameWidth"] = 500
+stringTable["zhTW"]["_adviceFrameWidth"] = 550
 stringTable["zhTW"]["_adviceFrameHeight"] = 100
 stringTable["zhTW"]["Add some units to your team to begin success estimation."] = "將一些單位加入到您的隊伍以開始成功估算。"
 stringTable["zhTW"]["round"] = "回合"

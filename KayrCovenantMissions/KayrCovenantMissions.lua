@@ -27,9 +27,9 @@ KayrCovenantMissions.showMissionHookDone = false
 -- --------------------------------------------------------------------------------------------------------------------
 -- Helpers
 -- --------------------------------------------------------
-local function RemoveCommas(str)
+local function CleanNumber(str)
     if not str then return end
-    return gsub(str, ",", "")
+    return gsub(str, "%p", "") -- Remove commas, points, etc.
 end
 
 local function RoundNumber(num, places)
@@ -89,16 +89,16 @@ function KayrCovenantMissions.CMFrame_ShowMission_Hook(...)
     local missionPage = _G["CovenantMissionFrame"]:GetMissionPage()
 
     local allyHealthValue = missionPage.Board.AllyHealthValue:GetText()
-    allyHealthValue = RemoveCommas(allyHealthValue)
+    allyHealthValue = CleanNumber(allyHealthValue)
 
     local allyPowerValue = missionPage.Board.AllyPowerValue:GetText()
-    allyPowerValue = RemoveCommas(allyPowerValue)
+    allyPowerValue = CleanNumber(allyPowerValue)
 
     local enemyHealthValue = missionPage.Stage.EnemyHealthValue:GetText()
-    enemyHealthValue = RemoveCommas(enemyHealthValue)
+    enemyHealthValue = CleanNumber(enemyHealthValue)
 
     local enemyPowerValue = missionPage.Stage.EnemyPowerValue:GetText()
-    enemyPowerValue = RemoveCommas(enemyPowerValue)
+    enemyPowerValue = CleanNumber(enemyPowerValue)
 
     -- Don't / 0
     allyHealthValue = max(1, allyHealthValue)

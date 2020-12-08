@@ -6,8 +6,8 @@ local max = _G["max"]
 local gsub = _G["gsub"]
 local hooksecurefunc = _G["hooksecurefunc"]
 local CreateFrame = _G["CreateFrame"]
-local IsAddOnLoaded = _G["IsAddOnLoaded"]
-local UIParentLoadAddOn = _G["UIParentLoadAddOn"]
+-- local IsAddOnLoaded = _G["IsAddOnLoaded"]
+-- local UIParentLoadAddOn = _G["UIParentLoadAddOn"]
 
 -- Debugging
 local KLib = _G["KLib"]
@@ -19,7 +19,7 @@ end
 -- --------------------------------------------------------------------------------------------------------------------
 -- Addon class
 -- --------------------------------------------------------
-KayrCovenantMissions = {}
+KayrCovenantMissions = CreateFrame("Frame", "KayrCovenantMissions", UIParent)
 KayrCovenantMissions.initDone = false
 KayrCovenantMissions.showMissionHookDone = false
 
@@ -85,7 +85,7 @@ function KayrCovenantMissions.CMFrame_ShowMission_Hook(...)
         return
     end
 
-    KLib:Con("KayrCovenantMissions.CMFrame_ShowMission_Hook")
+    -- KLib:Con("KayrCovenantMissions.CMFrame_ShowMission_Hook")
     local missionPage = _G["CovenantMissionFrame"]:GetMissionPage()
 
     local allyHealthValue = missionPage.Board.AllyHealthValue:GetText()
@@ -226,6 +226,14 @@ function KayrCovenantMissions.CMFrame_SetupTabs_Hook(...)
     return ...
 end
 
+-- --------------------------------------------------------------------------------------------------------------------
+-- Listen for Blizz Garrison UI being loaded
+-- --------------------------------------------------------
+function KayrCovenantMissions:ADDON_LOADED(event, addon)
+	if addon == "Blizzard_GarrisonUI" then
+        KayrCovenantMissions:Init()
+    end
+end
 
 -- --------------------------------------------------------------------------------------------------------------------
 -- Init
@@ -233,13 +241,9 @@ end
 function KayrCovenantMissions:Init()
     KLib:Con("KayrCovenantMissions.Init")
     if self.initDone then return end
-
-    if not ( IsAddOnLoaded("Blizzard_GarrisonUI") ) then
-        UIParentLoadAddOn("Blizzard_GarrisonUI");
-    end
-
     hooksecurefunc(_G["CovenantMissionFrame"], "SetupTabs", self.CMFrame_SetupTabs_Hook)
-
     self.initDone = true
 end
-KayrCovenantMissions:Init()
+
+KayrCovenantMissions:RegisterEvent("ADDON_LOADED")
+KayrCovenantMissions:SetScript("OnEvent", KayrCovenantMissions.ADDON_LOADED)

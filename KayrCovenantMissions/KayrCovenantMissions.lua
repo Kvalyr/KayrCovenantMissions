@@ -63,14 +63,14 @@ local function warnText(text) return ColorText(text, warningTextColor) end
 -- GetNumMissionPlayerUnitsTotal
 -- --------------------------------------------------------
 function KayrCovenantMissions:GetNumMissionPlayerUnitsTotal()
-	local numFollowers = 0
+    local numFollowers = 0
     local missionPage = _G["CovenantMissionFrame"]:GetMissionPage()
     for followerFrame in missionPage.Board:EnumerateFollowers() do
-		if followerFrame:GetFollowerGUID() then
-			numFollowers = numFollowers + 1
-		end
-	end
-	return numFollowers
+        if followerFrame:GetFollowerGUID() then
+            numFollowers = numFollowers + 1
+        end
+    end
+    return numFollowers
 end
 
 
@@ -129,6 +129,13 @@ function KayrCovenantMissions.CMFrame_ShowMission_Hook(...)
 end
 
 
+local function roundOrRounds(numRounds)
+    if numRounds == 1 then
+        return KayrCovenantMissions.i18n("round")
+    end
+    return KayrCovenantMissions.i18n("rounds")
+end
+
 -- --------------------------------------------------------------------------------------------------------------------
 -- ConstructAdviceText
 -- --------------------------------------------------------
@@ -142,14 +149,21 @@ function KayrCovenantMissions:ConstructAdviceText(roundsToBeatEnemy, roundsBefor
             numTextColor = middlingTextColor
         end
     end
-    local roundsToBeatText = _i("rounds")
-    if roundsToBeatEnemy == 1 then roundsToBeatText = _i("round") end
-    local roundsBeforeBeatenText = _i("rounds")
-    if roundsBeforeBeaten == 1 then roundsBeforeBeatenText = _i("round") end
+    local roundsToBeatEnemyStr = ColorText(roundsToBeatEnemy, numTextColor)
+    local roundsBeforeBeatenStr = ColorText(roundsBeforeBeaten, numTextColor)
 
-    local str = _i("It would take ") .. ColorText(roundsToBeatEnemy, numTextColor) .. _i(" combat ") .. roundsToBeatText .. _i(" for your current team to beat the enemy team.\n")
-    str = str .. _i("It would take ") .. ColorText(roundsBeforeBeaten, numTextColor) .. _i(" combat ") .. roundsBeforeBeatenText .. _i(" for the enemy team to beat your current team.\n")
+    local beatEnemytext = _i("It would take ") .. roundsToBeatEnemyStr .. _i(" combat ") .. roundOrRounds(roundsToBeatEnemy) .. _i(" for your current team to beat the enemy team.")
+    local beatenByEnemytext = _i("It would take ") .. roundsBeforeBeatenStr .. _i(" combat ") .. roundOrRounds(roundsBeforeBeaten) .. _i(" for the enemy team to beat your current team.")
 
+    if _i.currentLocale == "koKR" then
+        -- TODO: This is hacky. Implement better strings with string.format, more suited to i18n.
+        -- Korean is surely not the only language with different sentence structure.
+        -- Korean structure: "for [y] team to beat [z] team [x] round(s) It would take."
+        beatEnemytext = _i(" for your current team to beat the enemy team.") .. " " .. roundsToBeatEnemyStr .. " " .. roundOrRounds(roundsToBeatEnemy) .. " " .. _i("It would take ")
+        beatenByEnemytext = _i(" for the enemy team to beat your current team.") .. " " .. roundsBeforeBeatenStr .. " " .. roundOrRounds(roundsBeforeBeaten) .. " " .. _i("It would take ")
+    end
+
+    local str = beatEnemytext .. "\n" .. beatenByEnemytext .. "\n"
     if successPossible then
         if closeResult then
             str = str .. midText(_i("\nSuccess is possible with your current units, but it will be close.\n"))
@@ -237,7 +251,7 @@ end
 -- Listen for Blizz Garrison UI being loaded
 -- --------------------------------------------------------
 function KayrCovenantMissions:ADDON_LOADED(event, addon)
-	if addon == "Blizzard_GarrisonUI" then
+    if addon == "Blizzard_GarrisonUI" then
         KayrCovenantMissions:Init()
     end
 end

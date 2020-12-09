@@ -184,6 +184,21 @@ function KayrCovenantMissions.CMFrame_CloseMission_Hook(...)
     return ...
 end
 
+-- --------------------------------------------------------------------------------------------------------------------
+-- UpdateAdviceFrameSize
+-- --------------------------------------------------------
+function KayrCovenantMissions:UpdateAdviceFrameSize(width, height)
+    local _i = KayrCovenantMissions.i18n
+    local frameWidth = width or 600
+    local frameHeight = height or 90
+    if _i.currentLocale ~= "enUS" then
+        -- Extra size for the frame to prevent string truncation risk when i18n applied
+        local localeTable = _i.stringTable[_i.currentLocale] or {}
+        frameWidth = localeTable["_adviceFrameWidth"] or 700
+        frameHeight = localeTable["_adviceFrameHeight"] or 100
+    end
+    self.adviceFrame:SetSize(frameWidth, frameHeight)
+end
 
 -- --------------------------------------------------------------------------------------------------------------------
 -- Init Hook - Fired when the covenant mission table is first accessed
@@ -200,20 +215,12 @@ function KayrCovenantMissions.CMFrame_SetupTabs_Hook(...)
     hooksecurefunc(_G["CovenantMissionFrame"], "CloseMission", KayrCovenantMissions.CMFrame_CloseMission_Hook)
 
     local adviceFrame = CreateFrame("Frame", "KayrCovenantMissionsAdvice", _G["CovenantMissionFrame"], "TranslucentFrameTemplate")
-    local frameWidth = 600
-    local frameHeight = 90
-    if _i.currentLocale ~= "enUS" then
-        -- Extra size for the frame to prevent string truncation risk when i18n applied
-        local localeTable = _i.stringTable[_i.currentLocale] or {}
-        frameWidth = localeTable["_adviceFrameWidth"] or 700
-        frameHeight = localeTable["_adviceFrameHeight"] or 100
-    end
-    adviceFrame:SetSize(frameWidth, frameHeight)
     adviceFrame:SetPoint("TOPRIGHT", CovenantMissionFrame, "BOTTOMRIGHT")
     adviceFrame:SetClampedToScreen(true)  -- To keep it on-screen when user has a tiny display resolution
     adviceFrame:SetFrameStrata("TOOLTIP")
     adviceFrame:Hide()
     KayrCovenantMissions.adviceFrame = adviceFrame
+    KayrCovenantMissions:UpdateAdviceFrameSize()
 
     local adviceFrameText = adviceFrame:CreateFontString(adviceFrame, "OVERLAY", "GameTooltipText")
     adviceFrame.text = adviceFrameText

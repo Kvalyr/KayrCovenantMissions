@@ -7,6 +7,7 @@ local stringTable = {}
 i18n.stringTable = stringTable
 KayrCovenantMissions.i18n = i18n
 KayrCovenantMissions.i18n.currentLocale = _G["GetLocale"]()
+KayrCovenantMissions.i18n.useCaching = true
 -- --------------------------------------------------------------------------------------------------------------------
 
 -- --------------------------------------------------------------------------------------------------------------------
@@ -15,7 +16,7 @@ local KLib = _G["KLib"]
 if not KLib then
     KLib = {Con = function() end} -- No-Op if KLib not available
 end
---  KayrCovenantMissions.i18n.currentLocale = "koKR" -- DEBUG
+-- KayrCovenantMissions.i18n.currentLocale = "koKR" -- DEBUG
 -- --------------------------------------------------------------------------------------------------------------------
 
 -- TODO: Use ALIASES instead of passing the enUS str through as stringTable key
@@ -23,6 +24,12 @@ end
 function Trim(str)
     local from = str:match"^%s*()"
     return from > #str and "" or str:match(".*%S", from)
+end
+
+function i18n.DebugLocale(debugLocaleStr)
+    i18n.currentLocale = debugLocaleStr
+    i18n.useCaching = false
+    KayrCovenantMissions:UpdateAdviceFrameSize()
 end
 
 -- --------------------------------------------------------------------------------------------------------------------
@@ -34,7 +41,7 @@ function i18n.GetLocalization(str, locale)
     if locale == "enUS" then return str end
 
     local cachedResults = memoizeResults[locale]
-    if cachedResults and cachedResults[str] then return cachedResults[str] end
+    if i18n.useCaching and cachedResults and cachedResults[str] then return cachedResults[str] end
 
     local whitespaceStart, cleanedStr, whitespaceEnd = string.match(str, "^(%s*)(.-)(%s*)$")
 
@@ -118,8 +125,8 @@ stringTable["koKR"]["round"] = "판"
 stringTable["koKR"]["rounds"] = "판들"
 stringTable["koKR"]["It would take"] = "걸립니다"
 stringTable["koKR"]["combat"] = "전투"
-stringTable["koKR"]["for your current team to beat the enemy team."] = "당신의 팀이 적군의 팀을 이기기 위해."
-stringTable["koKR"]["for the enemy team to beat your current team."] = "적군의 팀이 당신의 팀을 이기기 위해."
+stringTable["koKR"]["for your current team to beat the enemy team."] = "당신의 팀이 적군의 팀을 이기기 위해"
+stringTable["koKR"]["for the enemy team to beat your current team."] = "적군의 팀이 당신의 팀을 이기기 위해"
 stringTable["koKR"]["Success is possible with your current units, but it will be close."] = "현재의 병력들로 성공이 가능하긴 하지만, 실패 할 수 도 있습니다."
 stringTable["koKR"]["There is a reasonable chance of success with your current units."] = "현재의 병력으로 합리적인 임무성공을 할 수 있습니다."
 stringTable["koKR"]["Mission success is impossible with your current units."] = "현재의 병력들로는 임무성공이 불가능 합니다."

@@ -75,6 +75,7 @@ setmetatable(i18n, mt)
 -- --------------------------------------------------------------------------------------------------------------------
 
 -- French
+-- By JEUD @ Curse
 stringTable["frFR"] = {}
 stringTable["frFR"]["_adviceFrameWidth"] = 700
 stringTable["frFR"]["_adviceFrameHeight"] = 90
@@ -92,6 +93,7 @@ stringTable["frFR"]["Warning: This guidance is a rough estimate. Unit abilities 
 stringTable["frFR"]["[No Mission Selected]"] = "[Pas d'aventure sélectionnée]"
 
 -- German
+-- By Aurantea@SteamwheedleCartelEU
 stringTable["deDE"] = {}
 stringTable["deDE"]["_adviceFrameWidth"] = 600
 stringTable["deDE"]["_adviceFrameHeight"] = 100
@@ -117,6 +119,7 @@ stringTable["enGB"] = stringTable["enUS"]
 -- stringTable["itIT"] = {}
 
 -- Korean (RTL)
+-- By Kilberos @ Curse
 stringTable["koKR"] = {}
 stringTable["koKR"]["_adviceFrameWidth"] = 550
 stringTable["koKR"]["_adviceFrameHeight"] = 100
@@ -172,6 +175,7 @@ stringTable["zhTW"]["Warning: This guidance is a rough estimate. Unit abilities 
 stringTable["zhTW"]["[No Mission Selected]"] = "[沒有選擇的任務]"
 
 -- Russian
+-- By Hubbotu @ Curse
 stringTable["ruRU"] = {}
 stringTable["ruRU"]["Add some units to your team to begin success estimation."] = "Добавьте несколько отрядов в свою команду, чтобы начать оценку успеха."
 stringTable["ruRU"]["round"] = "раунд"
@@ -187,6 +191,7 @@ stringTable["ruRU"]["Warning: This guidance is a rough estimate. Unit abilities 
 stringTable["ruRU"]["[No Mission Selected]"] = "[Миссия не выбрана]"
 
 -- Spanish
+-- By Araxieel @ Curse
 stringTable["esES"] = {}
 stringTable["esES"]["Add some units to your team to begin success estimation."] = "Añade tropas a tu equipo para empezar la estimación."
 stringTable["esES"]["round"] = "ronda"
@@ -202,7 +207,33 @@ stringTable["esES"]["Warning: This guidance is a rough estimate. Unit abilities 
 stringTable["esES"]["[No Mission Selected]"] = "[No se ha seleccionado ninguna misión]"
 
 -- Spanish (Mexico)
--- stringTable["esMX"] = {}
+-- By bakadeshisho @ Curse
+stringTable["esMX"] = {}
+stringTable["esMX"]["Add some units to your team to begin success estimation."] = "Envíe algunas unidades a su equipo para comenzar la estimación del éxito."
+stringTable["esMX"]["round"] = "ronda"
+stringTable["esMX"]["rounds"] = "rondas"
+stringTable["esMX"]["It would take"] = "Se necesitan"
+stringTable["esMX"]["combat"] = "combate"
+stringTable["esMX"]["for your current team to beat the enemy team."] = "para que tu equipo actual derrote al equipo enemigo."
+stringTable["esMX"]["for the enemy team to beat your current team."] = "para que el equipo enemigo derrote a tu equipo actual."
+stringTable["esMX"]["Success is possible with your current units, but it will be close."] = "Su equipo actual puede ganar, pero por un pequeño margen."
+stringTable["esMX"]["There is a reasonable chance of success with your current units."] = "Existe una posibilidad razonable de éxito con sus unidades actuales."
+stringTable["esMX"]["Mission success is impossible with your current units."] = "El éxito de la misión es imposible con tus unidades actuales."
+stringTable["esMX"]["Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result."] = "Advertencia: Esta orientación es una estimación aproximada. Las habilidades de las unidades influyen fuertemente en el resultado final."
+stringTable["esMX"]["[No Mission Selected]"] = "[No se ha seleccionado ninguna misión]"
 
 -- Portuguese (Brazil)
--- stringTable["ptBR"] = {}
+-- By Mufasto @ Curse
+stringTable["ptBR"] = {}
+stringTable["ptBR"]["Add some units to your team to begin success estimation."] = "Adicione algumas unidades na sua equipe para obter uma estimativa de sucesso."
+stringTable["ptBR"]["round"] = "rodada"
+stringTable["ptBR"]["rounds"] = "rodadas"
+stringTable["ptBR"]["It would take"] = "Seria preciso"
+stringTable["ptBR"]["combat"] = "combate"
+stringTable["ptBR"]["for your current team to beat the enemy team."] = "para seu time atual vencer o time inimigo."
+stringTable["ptBR"]["for the enemy team to beat your current team."] = "para o time inimigo vencer o seu time atual."
+stringTable["ptBR"]["Success is possible with your current units, but it will be close."] = "O sucesso é possível com suas unidades atuais, mas estará próximo."
+stringTable["ptBR"]["There is a reasonable chance of success with your current units."] = "Há uma chance razoável de sucesso com suas unidades atuais."
+stringTable["ptBR"]["Mission success is impossible with your current units."] = "O sucesso da missão é impossível com suas unidades atuais."
+stringTable["ptBR"]["Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result."] = "Aviso: Esta orientação é uma estimativa aproximada. As habilidades da unidade influenciam fortemente o resultado real."
+stringTable["ptBR"]["[No Mission Selected]"] = "[Nenhuma missão selecionada]"

@@ -116,7 +116,22 @@ stringTable["enGB"] = stringTable["enUS"]
 -- stringTable["enUS"]["combat"] = "wombat" -- DEBUG
 
 -- Italian
--- stringTable["itIT"] = {}
+-- by zemaree @ Github
+stringTable["itIT"] = {}
+stringTable["itIT"]["_adviceFrameWidth"] = 550
+stringTable["itIT"]["_adviceFrameHeight"] = 100
+stringTable["itIT"]["Add some units to your team to begin success estimation."] = "Aggiungi qualche unità al tuo gruppo per iniziare la stima del successo"
+stringTable["itIT"]["round"] = "turno"
+stringTable["itIT"]["rounds"] = "turni"
+stringTable["itIT"]["It would take"] = "Servirebbero"
+stringTable["itIT"]["combat"] = ""
+stringTable["itIT"]["for your current team to beat the enemy team."] = "per il tuo gruppo per battere il gruppo avversario"
+stringTable["itIT"]["for the enemy team to beat your current team."] = "per il gruppo avversario per sconfiggere il tuo gruppo"
+stringTable["itIT"]["Success is possible with your current units, but it will be close."] = "E' possibile vincere con il tuo gruppo, ma il margine è ridotto"
+stringTable["itIT"]["There is a reasonable chance of success with your current units."] = "C'è un ragionevole margine di successo per il tuo gruppo"
+stringTable["itIT"]["Mission success is impossible with your current units."] = "E' impossibile vincere con tuo gruppo"
+stringTable["itIT"]["Warning: This guidance is a rough estimate. Unit abilities strongly influence the actual result."] = "Attenzione: Queste stime sono una approssimazione. Le abilità delle unità influenzano fortemente il risultato attuale"
+stringTable["itIT"]["[No Mission Selected]"] = "[Nessuna missione selezionata]"
 
 -- Korean (RTL)
 -- By Kilberos @ Curse

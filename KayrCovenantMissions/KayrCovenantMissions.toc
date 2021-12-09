@@ -1,4 +1,4 @@
-## Interface: 90100
+## Interface: 90105
 ## Title: Covenant Mission Success Estimates
 ## Author: Kvalyr
 ## Notes: Simple Covenant Mission Success Estimates

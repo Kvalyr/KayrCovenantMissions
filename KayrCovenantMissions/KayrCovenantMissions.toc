@@ -1,8 +1,8 @@
-## Interface: 90100
+## Interface: 100000
 ## Title: Covenant Mission Success Estimates
 ## Author: Kvalyr
 ## Notes: Simple Covenant Mission Success Estimates
-## Version: 0.3.7
+## Version: 0.3.8
 
 KayrCovenantMissions.lua
 i18n.lua

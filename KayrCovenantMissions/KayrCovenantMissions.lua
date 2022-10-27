@@ -236,7 +236,7 @@ function KayrCovenantMissions.CMFrame_SetupTabs_Hook(...)
     KayrCovenantMissions.adviceFrame = adviceFrame
     KayrCovenantMissions:UpdateAdviceFrameSize()
 
-    local adviceFrameText = adviceFrame:CreateFontString(adviceFrame, "OVERLAY", "GameTooltipText")
+    local adviceFrameText = adviceFrame:CreateFontString("KayrCovenantMissionsAdviceText", "OVERLAY", "GameTooltipText")
     adviceFrame.text = adviceFrameText
     adviceFrameText:SetPoint("CENTER", 0, 0)
     adviceFrameText:SetPoint("TOPLEFT", adviceFrame, "TOPLEFT", 14, -14)
